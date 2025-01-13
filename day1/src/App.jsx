@@ -1,4 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import ClassComponent from "./ClassComponent";
+import MRFInReact from "./MRFInReact";
+import Remaining from "./Remaining";
+import IExtra from "./IExtra.jsx";
 
 export default function App() {
   const [counter, setCounter] = useState(42);
@@ -46,6 +51,10 @@ export default function App() {
       <br />
       <p>List of Books</p>
       <Lists list={books} />
+      <ClassComponent />
+      <MRFInReact />
+      <Remaining />
+      <IExtra />
     </>
   );
 }
