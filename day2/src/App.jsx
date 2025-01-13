@@ -1,12 +1,23 @@
 import "./App.css";
+import Basic from "./components/Basic";
+import List from "./components/List";
+import Search from "./components/Search";
 
 function App() {
-  //All JS Here
-  // const title = "React....";
   return (
     <div>
       {/* This is JSX. HTML + JS, Write JS inside {} */}
-      <h1>Hello React</h1>
+      <Basic />
+
+      <hr />
+      <Search />
+
+      {/* Lists In React */}
+      <hr />
+      <List />
+      <Search />
+
+      {/* Meet Another Components */}
     </div>
   );
 }
