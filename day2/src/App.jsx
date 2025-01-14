@@ -17,10 +17,11 @@ function App() {
       <hr />
       <List />
       <Search />
+      <hr />
+      <EventHandler />
       <br />
       <br />
       {/* Meet Another Components */}
-      <EventHandler />
     </div>
   );
 }

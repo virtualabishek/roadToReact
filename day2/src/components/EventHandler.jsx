@@ -1,12 +1,22 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 
-const EventHandler = () => {
-  // do js here
+const ThisIsButton = () => {
+  const [count, setCount] = useState(0);
   const handleClick = () => {
     setCount(count + 1);
   };
 
-  const [count, setCount] = useState(0);
+  return (
+    <>
+      <button onClick={handleClick}>Increment Me</button>
+      <p>Count: {count}</p>
+    </>
+  );
+};
+
+const EventHandler = () => {
+  // do js here
 
   const user = {
     id: "777",
@@ -24,19 +34,8 @@ const EventHandler = () => {
 
   return (
     <>
-      {/* <button type="button" onClick={handleClick}>
-        Increase Count
-      </button>
-      <p>Count: {count}</p> */}
-      <input type="text" onChange={e} />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <ThisIsButton />
+      <hr />
     </>
   );
 };
