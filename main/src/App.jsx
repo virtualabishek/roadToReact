@@ -1,4 +1,5 @@
 import AppMain from "./components/AppMain";
+import LiftingState from "./learning components/LiftingState";
 
 const App = () => {
   return (
@@ -7,6 +8,9 @@ const App = () => {
      road to react.*/}
       <AppMain />
       {/* The following components are some extra for exploring. */}
+      <br />
+      <hr />
+      <LiftingState />
     </div>
   );
 };
