@@ -119,13 +119,13 @@ const Search = (props) => {
 const ListComponent = ({ listItems }) => {
   return (
     <ol className="list-item list-disc">
-      {listItems.map((item) => (
-        <Items key={item.objectID} item={item} />
+      {listItems.map(({ objectID, ...item }) => (
+        <Items key={objectID} {...item} />
       ))}
     </ol>
   );
 };
-const Items = ({ item: { title, url, author, num_comments, points } }) => {
+const Items = ({ title, url, author, num_comments, points }) => {
   return (
     <li className="list-item list-disc">
       <span className="cursor-pointer px-4">
