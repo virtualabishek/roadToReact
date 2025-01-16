@@ -100,41 +100,40 @@ const LiftingState = () => {
 };
 
 const Search = (props) => {
+  const { searchMe } = props;
   return (
     <>
-      <label htmlFor="input">Search Tech Stack:</label>
+      <label className="py-3" htmlFor="input">
+        Search Tech Stack:{" "}
+      </label>
       <input
         className="bg-gray-400 border-2 border-yellow-500 text-pink-950"
         type="text"
-        onChange={props.searchMe}
+        onChange={searchMe}
         placeholder="Search Any Book"
       />
     </>
   );
 };
 
-const ListComponent = (props) => {
+const ListComponent = ({ listItems }) => {
   return (
     <ol className="list-item list-disc">
-      {props.listItems.map((item) => (
+      {listItems.map((item) => (
         <Items key={item.objectID} item={item} />
       ))}
     </ol>
   );
 };
-
-const Items = (props) => {
+const Items = ({ item: { title, url, author, num_comments, points } }) => {
   return (
     <li className="list-item list-disc">
       <span className="cursor-pointer px-4">
-        <a href={props.item.url}>{props.item.title}</a>,
+        <a href={url}>{title}</a>,
       </span>
-      <span className="text-green-600">{props.item.author},</span>
-      <span className="text-blue-500">
-        {" "}
-        No. Of Comments: {props.item.num_comments},
-      </span>
-      <span className="text-yellow-400"> Points:{props.item.points}</span>
+      <span className="text-green-600">{author},</span>
+      <span className="text-blue-500"> No. Of Comments: {num_comments},</span>
+      <span className="text-yellow-400"> Points:{points}</span>
     </li>
   );
 };
