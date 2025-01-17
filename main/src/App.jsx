@@ -10,7 +10,7 @@ const App = () => {
       {/* The following components are some extra for exploring. */}
       <br />
       <hr />
-      <LiftingState />
+      {/* <LiftingState /> */}
     </div>
   );
 };
