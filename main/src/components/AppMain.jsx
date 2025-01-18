@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import * as React from "react";
 
+const useStorageState = (key, initialState) => {
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
+
+  useEffect(() => {
+    localStorage.setItem(key, value);
+  }, [value, key]);
+  return [value, setValue];
+};
+
 const AppMain = () => {
   const stories = [
     {
@@ -85,13 +94,7 @@ const AppMain = () => {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = React.useState(
-    localStorage.getItem("search") || "React"
-  );
-
-  useEffect(() => {
-    localStorage.setItem("search", searchTerm);
-  }, [searchTerm]);
+  const [searchTerm, setSearchTerm] = useStorageState("search", "React");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -102,31 +105,61 @@ const AppMain = () => {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleClick = () => {};
+
   return (
     <div>
       <h1 className="text-center text-2xl">My Hacker Stories</h1>
 
-      <Search search={searchTerm} onSearch={handleSearch} />
+      <InputWithLabel
+        id="search"
+        label="Search"
+        value={searchTerm}
+        isFocused
+        onInputChange={handleSearch}
+      >
+        Search:
+      </InputWithLabel>
 
       <br />
       <hr />
       <br />
       <List list={searchedStories} />
+      <button type="button" onClick={handleClick}>
+        Click
+      </button>
     </div>
   );
 };
 
-const Search = ({ search, onSearch }) => (
-  <div>
-    <label htmlFor="search">Search: </label>
-    <input
-      className="bg-gray-400 border-2 border-yellow-500 text-pink-950"
-      type="text"
-      value={search}
-      onChange={onSearch}
-    />
-  </div>
-);
+const InputWithLabel = ({
+  id,
+  label,
+  value,
+  type = "text",
+  onInputChange,
+  isFocused,
+  children,
+}) => {
+  const inputRef = React.useRef();
+  useEffect(() => {
+    if (isFocused && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFocused]);
+  return (
+    <div>
+      <label htmlFor={id}>{children}</label> &nbsp;
+      <input
+        className="bg-gray-400 border-2 border-yellow-500 text-pink-950"
+        type={type}
+        value={value}
+        autoFocus={isFocused}
+        onChange={onInputChange}
+      />
+    </div>
+  );
+};
 
 const List = ({ list }) => (
   <ul className="list-decimal">
@@ -145,7 +178,7 @@ const Item = ({ item }) => (
       {" "}
       No. Of Comments: {item.num_comments},
     </span>
-    <span className="text-yellow-400"> Points:{item.points}</span>
+    <span className="text-yellow-400"> Points: {item.points}</span>
   </li>
 );
 
