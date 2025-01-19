@@ -11,7 +11,7 @@ const useStorageState = (key, initialState) => {
 };
 
 const AppMain = () => {
-  const stories = [
+  const initialStories = [
     {
       title: "React",
       url: "https://reactjs.org/",
@@ -95,17 +95,22 @@ const AppMain = () => {
   ];
 
   const [searchTerm, setSearchTerm] = useStorageState("search", "React");
+  const [stories, setStories] = useState(initialStories);
+
+  const handleRemoveStories = (item) => {
+    const newStories = stories.filter(
+      (story) => item.objectID !== story.objectID
+    );
+    setStories(newStories);
+  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-  searchTerm;
 
   const searchedStories = stories.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleClick = () => {};
 
   return (
     <div>
@@ -124,10 +129,7 @@ const AppMain = () => {
       <br />
       <hr />
       <br />
-      <List list={searchedStories} />
-      <button type="button" onClick={handleClick}>
-        Click
-      </button>
+      <List list={searchedStories} onRemoveItem={handleRemoveStories} />
     </div>
   );
 };
@@ -151,35 +153,49 @@ const InputWithLabel = ({
     <div>
       <label htmlFor={id}>{children}</label> &nbsp;
       <input
+        ref={inputRef}
+        id={id}
         className="bg-gray-400 border-2 border-yellow-500 text-pink-950"
         type={type}
         value={value}
-        autoFocus={isFocused}
         onChange={onInputChange}
       />
     </div>
   );
 };
 
-const List = ({ list }) => (
+const List = ({ list, onRemoveItem }) => (
   <ul className="list-decimal">
     {list.map((item) => (
-      <Item key={item.objectID} item={item} />
+      <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
     ))}
   </ul>
 );
-const Item = ({ item }) => (
-  <li>
-    <span className="cursor-pointer px-4">
-      <a href={item.url}>{item.title}</a>,
-    </span>
-    <span className="text-green-600">{item.author},</span>
-    <span className="text-blue-500">
-      {" "}
-      No. Of Comments: {item.num_comments},
-    </span>
-    <span className="text-yellow-400"> Points: {item.points}</span>
-  </li>
-);
+
+const Item = ({ item, onRemoveItem }) => {
+  return (
+    <li>
+      <span className="cursor-pointer px-4">
+        <a href={item.url}>{item.title}</a>,
+      </span>
+      <span className="text-green-600">{item.author},</span>
+      <span className="text-blue-500">
+        {" "}
+        No. Of Comments: {item.num_comments},
+      </span>
+      <span className="text-yellow-400"> Points: {item.points}</span>
+      <span>
+        {" "}
+        <button
+          className="border-4 border-red-900 m-2 p-1 hover:bg-black hover:text-white cursor-pointer"
+          type="button"
+          onClick={() => onRemoveItem(item)}
+        >
+          Delete
+        </button>
+      </span>
+    </li>
+  );
+};
 
 export default AppMain;
