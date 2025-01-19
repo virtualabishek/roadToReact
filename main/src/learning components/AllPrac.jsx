@@ -85,10 +85,14 @@ const AllPrac = () => {
     },
   ];
   const [searchTerm, setSearchTerm] = useState("");
+  const [stories, setStories] = useState(initialStories);
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-  console.log(searchTerm);
+  const searchStories = stories.filter((story) =>
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // console.log(searchTerm);
   return (
     <>
       <div>
@@ -98,7 +102,7 @@ const AllPrac = () => {
         </InputBox>
       </div>
       <div>
-        <ListData list={initialStories} />
+        <ListData list={searchStories} />
       </div>
     </>
   );

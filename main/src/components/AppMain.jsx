@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import { useState, useEffect } from "react";
 import * as React from "react";
 
@@ -94,8 +95,18 @@ const AppMain = () => {
     },
   ];
 
+  const getAsyncStories = () =>
+    new Promise((resolve) =>
+      setTimeout(() => resolve({ data: { stories: initialStories } }, 2000))
+    );
+
   const [searchTerm, setSearchTerm] = useStorageState("search", "React");
   const [stories, setStories] = useState(initialStories);
+  useEffect(() => {
+    getAsyncStories().then((result) => {
+      setStories(result.data.stories);
+    });
+  }, []);
 
   const handleRemoveStories = (item) => {
     const newStories = stories.filter(
@@ -180,12 +191,10 @@ const Item = ({ item, onRemoveItem }) => {
       </span>
       <span className="text-green-600">{item.author},</span>
       <span className="text-blue-500">
-        {" "}
         No. Of Comments: {item.num_comments},
       </span>
       <span className="text-yellow-400"> Points: {item.points}</span>
       <span>
-        {" "}
         <button
           className="border-4 border-red-900 m-2 p-1 hover:bg-black hover:text-white cursor-pointer"
           type="button"
