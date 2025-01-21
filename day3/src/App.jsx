@@ -1,4 +1,5 @@
 import Form from "./components/Form";
+import JokesGenerator from "./components/JokesGenerator";
 import UseState from "./components/UseState";
 
 const Lists = (props) => {
@@ -43,7 +44,26 @@ const App = () => {
 
       {/* Aru Topics Haru:  */}
       {/* <UseState /> */}
+      <hr />
+      <h3>PROJECT - I</h3>
+      <hr />
       <Form />
+      <hr />
+      <h3>PROJECT - II</h3>
+      <hr />
+      <JokesGenerator />
+      <hr />
+      <h3>PROJECT - III</h3>
+      <hr />
+      <hr />
+      <h3>PROJECT - IV</h3>
+      <hr />
+      <hr />
+      <h3>PROJECT - V</h3>
+      <hr />
+      <hr />
+      <h3>PROJECT - VI</h3>
+      <hr />
     </>
   );
 };
