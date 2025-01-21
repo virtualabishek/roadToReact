@@ -1,4 +1,5 @@
-import UseState from "./UseState";
+import Form from "./components/Form";
+import UseState from "./components/UseState";
 
 const Lists = (props) => {
   return (
@@ -38,12 +39,11 @@ const App = () => {
   ];
   return (
     <>
-      <div>
-        <Lists list={stories} />
-      </div>
+      <div>{/* <Lists list={stories} /> */}</div>
 
       {/* Aru Topics Haru:  */}
-      <UseState />
+      {/* <UseState /> */}
+      <Form />
     </>
   );
 };
