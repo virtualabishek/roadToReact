@@ -1,5 +1,6 @@
 import Form from "./components/Form";
 import JokesGenerator from "./components/JokesGenerator";
+import Password from "./components/Password";
 import UseState from "./components/UseState";
 
 const Lists = (props) => {
@@ -55,6 +56,7 @@ const App = () => {
       <hr />
       <h3>PROJECT - III</h3>
       <hr />
+      <Password />
       <hr />
       <h3>PROJECT - IV</h3>
       <hr />
