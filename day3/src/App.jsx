@@ -1,4 +1,5 @@
 import Form from "./components/Form";
+import IPFinder from "./components/IPFinder";
 import JokesGenerator from "./components/JokesGenerator";
 import Password from "./components/Password";
 import UseState from "./components/UseState";
@@ -60,6 +61,7 @@ const App = () => {
       <hr />
       <h3>PROJECT - IV</h3>
       <hr />
+      <IPFinder />
       <hr />
       <h3>PROJECT - V</h3>
       <hr />
